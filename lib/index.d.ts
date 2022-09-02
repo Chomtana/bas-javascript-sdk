@@ -1,0 +1,30 @@
+import { IConfig } from "./config";
+import { Governance } from "./governance";
+import { KeyProvider } from "./provider";
+import { Staking } from "./staking";
+import { IChainConfig, IChainParams } from "./types";
+import { RuntimeUpgrade } from "./runtime";
+import BigNumber from "bignumber.js";
+export * from './config';
+export * from './governance';
+export * from './metamask';
+export * from './provider';
+export * from './staking';
+export * from './types';
+export declare class BasSdk {
+    private readonly config;
+    private keyProvider?;
+    private staking?;
+    private runtimeUpgrade?;
+    private governance?;
+    constructor(config: IConfig);
+    isConnected(): boolean;
+    connect(): Promise<void>;
+    getKeyProvider(): KeyProvider;
+    getStaking(): Staking;
+    getRuntimeUpgrade(): RuntimeUpgrade;
+    getGovernance(): Governance;
+    getChainConfig(): Promise<IChainConfig>;
+    getChainParams(): Promise<IChainParams>;
+    transferToChapel(amount: BigNumber): Promise<void>;
+}

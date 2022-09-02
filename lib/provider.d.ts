@@ -1,0 +1,46 @@
+import { IConfig } from "./config";
+import { IChainConfig, IChainParams, IKeyProvider, IPendingTx, Web3Address, Web3Uint256 } from "./types";
+import Web3 from "web3";
+import { Contract } from "web3-eth-contract";
+export declare class KeyProvider implements IKeyProvider {
+    private readonly config;
+    accounts?: Web3Address[];
+    web3?: Web3;
+    stakingAddress?: Web3Address;
+    slashingIndicatorAddress?: Web3Address;
+    systemRewardAddress?: Web3Address;
+    stakingPoolAddress?: Web3Address;
+    governanceAddress?: Web3Address;
+    chainConfigAddress?: Web3Address;
+    runtimeUpgradeAddress?: Web3Address;
+    deployerProxyAddress?: Web3Address;
+    stakingContract?: Contract;
+    slashingIndicatorContract?: Contract;
+    systemRewardContract?: Contract;
+    stakingPoolContract?: Contract;
+    governanceContract?: Contract;
+    chainConfigContract?: Contract;
+    runtimeUpgradeContract?: Contract;
+    deployerProxyContract?: Contract;
+    relayHubContract?: Contract;
+    crossChainBridgeContract?: Contract;
+    constructor(config: IConfig);
+    isConnected(): boolean;
+    connect(web3: Web3): Promise<void>;
+    switchNetworkTo(chainId: number): Promise<void>;
+    connectFromInjected(): Promise<void>;
+    private unlockAccounts;
+    disconnect(): Promise<void>;
+    getAccounts(): Web3Address[];
+    getMyAddress(): Web3Address;
+    getMyBalance(): Promise<Web3Uint256>;
+    getBlockNumber(): Promise<number>;
+    getChainConfig(): Promise<IChainConfig>;
+    getChainParams(): Promise<IChainParams>;
+    getCurrentEpoch(): Promise<number>;
+    sendTx(sendOptions: {
+        to: string;
+        data?: string;
+        value?: string;
+    }): Promise<IPendingTx>;
+}
