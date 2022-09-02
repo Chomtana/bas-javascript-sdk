@@ -1,5 +1,5 @@
 {
-  "name": "@ankr.com/bas-javascript-sdk",
+  "name": "@chomtana/bas-javascript-sdk",
   "version": "0.0.2",
   "description": "",
   "main": "./lib/index.js",
