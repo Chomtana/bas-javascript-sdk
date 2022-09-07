@@ -19,6 +19,11 @@ export declare class ProposalBuilder {
     removeValidator(account: Web3Address): Promise<ProposalBuilder>;
     activateValidator(account: Web3Address): Promise<ProposalBuilder>;
     disableValidator(account: Web3Address): Promise<ProposalBuilder>;
+    updateEmissionRate(ratePerSecond: number): Promise<ProposalBuilder>;
+    updateMasterChefOwner(account: Web3Address): Promise<ProposalBuilder>;
+    setMinStaking(amount: number): Promise<ProposalBuilder>;
+    setMinRegisterValidator(amount: number): Promise<ProposalBuilder>;
+    setActiveValidatorLength(amount: number): Promise<ProposalBuilder>;
     upgradeRuntime(systemContract: Web3Address, byteCode: string): Promise<ProposalBuilder>;
 }
 export declare class Governance {

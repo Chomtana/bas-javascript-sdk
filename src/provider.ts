@@ -18,6 +18,8 @@ const RUNTIME_UPGRADE_ABI = require('./abi/RuntimeUpgrade.json')
 const DEPLOYER_PROXY_ABI = require('./abi/DeployerProxy.json')
 const RELAY_HUB_ABI = require('./abi/RelayHub.json')
 const CROSS_CHAIN_BRIDGE_ABI = require('./abi/CrossChainBridge.json')
+const KDI_MASTERCHEF_ABI = require('./abi/KDIMasterChef.json')
+const KDI_TOKEN_ABI = require('./abi/KDIToken.json')
 
 export class KeyProvider implements IKeyProvider {
 
@@ -33,6 +35,8 @@ export class KeyProvider implements IKeyProvider {
   public chainConfigAddress?: Web3Address;
   public runtimeUpgradeAddress?: Web3Address;
   public deployerProxyAddress?: Web3Address;
+  public kdiTokenAddress?: string;
+  public kdiMasterChefAddress?: string;
   // contracts
   public stakingContract?: Contract;
   public slashingIndicatorContract?: Contract;
@@ -44,6 +48,8 @@ export class KeyProvider implements IKeyProvider {
   public deployerProxyContract?: Contract;
   public relayHubContract?: Contract;
   public crossChainBridgeContract?: Contract;
+  public kdiTokenContract?: Contract;
+  public kdiMasterChefContract?: Contract;
 
   constructor(
     private readonly config: IConfig,
@@ -72,6 +78,8 @@ export class KeyProvider implements IKeyProvider {
     this.chainConfigAddress = this.config.chainConfigAddress;
     this.runtimeUpgradeAddress = this.config.runtimeUpgradeAddress;
     this.deployerProxyAddress = this.config.deployerProxyAddress;
+    this.kdiTokenAddress = this.config.kdiTokenAddress;
+    this.kdiMasterChefAddress = this.config.kdiMasterChefAddress;
     // contracts
     this.stakingContract = new web3.eth.Contract(STAKING_ABI, this.config.stakingAddress);
     this.slashingIndicatorContract = new web3.eth.Contract(SLASHING_INDICATOR_ABI, this.config.slashingIndicatorAddress);
@@ -83,6 +91,8 @@ export class KeyProvider implements IKeyProvider {
     this.deployerProxyContract = new web3.eth.Contract(DEPLOYER_PROXY_ABI, this.config.deployerProxyAddress);
     // this.relayHubContract = new web3.eth.Contract(RELAY_HUB_ABI, this.config.relayHubAddress);
     // this.crossChainBridgeContract = new web3.eth.Contract(CROSS_CHAIN_BRIDGE_ABI, this.config.crossChainBridgeAddress);
+    this.kdiTokenContract = new web3.eth.Contract(KDI_MASTERCHEF_ABI, this.config.kdiTokenAddress);
+    this.kdiMasterChefContract = new web3.eth.Contract(KDI_TOKEN_ABI, this.config.kdiMasterChefAddress);
   }
 
   public async switchNetworkTo(chainId: number): Promise<void> {

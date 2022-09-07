@@ -11,6 +11,7 @@ import {PastEventOptions} from "web3-eth-contract";
 import BigNumber from "bignumber.js";
 import {keccak256} from "web3-utils";
 import {sortEventData} from "./utils";
+import Web3 from "web3";
 
 export class ProposalBuilder {
 
@@ -116,6 +117,56 @@ export class ProposalBuilder {
     const inputData = this.keyProvider.stakingContract!.methods.disableValidator(account).encodeABI()
     this.actions.push({
       target: this.keyProvider.stakingAddress!,
+      inputData: inputData,
+      value: '0x00',
+    });
+    return this
+  }
+
+  public async updateEmissionRate(ratePerSecond: number): Promise<ProposalBuilder> {
+    const inputData = this.keyProvider.kdiMasterChefContract!.methods.updateEmissionRate(Web3.utils.toWei(ratePerSecond.toString())).encodeABI()
+    this.actions.push({
+      target: this.keyProvider.kdiMasterChefAddress!,
+      inputData: inputData,
+      value: '0x00',
+    });
+    return this
+  }
+
+  public async updateMasterChefOwner(account: Web3Address): Promise<ProposalBuilder> {
+    const inputData = this.keyProvider.kdiMasterChefContract!.methods.transferOwnership(account).encodeABI()
+    this.actions.push({
+      target: this.keyProvider.kdiMasterChefAddress!,
+      inputData: inputData,
+      value: '0x00',
+    });
+    return this
+  }
+
+  public async setMinStaking(amount: number): Promise<ProposalBuilder> {
+    const inputData = this.keyProvider.chainConfigContract!.methods.setMinStakingAmount(Web3.utils.toWei(amount.toString())).encodeABI()
+    this.actions.push({
+      target: this.keyProvider.chainConfigAddress!,
+      inputData: inputData,
+      value: '0x00',
+    });
+    return this
+  }
+
+  public async setMinRegisterValidator(amount: number): Promise<ProposalBuilder> {
+    const inputData = this.keyProvider.chainConfigContract!.methods.setMinValidatorStakeAmount(Web3.utils.toWei(amount.toString())).encodeABI()
+    this.actions.push({
+      target: this.keyProvider.chainConfigAddress!,
+      inputData: inputData,
+      value: '0x00',
+    });
+    return this
+  }
+
+  public async setActiveValidatorLength(amount: number): Promise<ProposalBuilder> {
+    const inputData = this.keyProvider.chainConfigContract!.methods.setActiveValidatorsLength(Web3.utils.toWei(amount.toString())).encodeABI()
+    this.actions.push({
+      target: this.keyProvider.chainConfigAddress!,
       inputData: inputData,
       value: '0x00',
     });

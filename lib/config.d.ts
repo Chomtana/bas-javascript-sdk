@@ -20,4 +20,6 @@ export interface IConfig {
     deployerProxyAddress: Web3Address;
     relayHubAddress?: Web3Address;
     crossChainBridgeAddress?: Web3Address;
+    kdiTokenAddress?: Web3Address;
+    kdiMasterChefAddress?: Web3Address;
 }

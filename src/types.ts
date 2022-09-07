@@ -34,6 +34,8 @@ export interface IKeyProvider {
   chainConfigAddress?: Web3Address;
   runtimeUpgradeAddress?: Web3Address;
   deployerProxyAddress?: Web3Address;
+  kdiTokenAddress?: Web3Address;
+  kdiMasterChefAddress?: Web3Address;
   // contracts
   stakingContract?: Contract;
   slashingIndicatorContract?: Contract;
@@ -45,6 +47,8 @@ export interface IKeyProvider {
   deployerProxyContract?: Contract;
   relayHubContract?: Contract;
   crossChainBridgeContract?: Contract;
+  kdiTokenContract?: Contract;
+  kdiMasterChefContract?: Contract;
 }
 
 export interface IPendingTx {

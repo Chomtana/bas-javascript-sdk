@@ -14,6 +14,8 @@ export declare class KeyProvider implements IKeyProvider {
     chainConfigAddress?: Web3Address;
     runtimeUpgradeAddress?: Web3Address;
     deployerProxyAddress?: Web3Address;
+    kdiTokenAddress?: string;
+    kdiMasterChefAddress?: string;
     stakingContract?: Contract;
     slashingIndicatorContract?: Contract;
     systemRewardContract?: Contract;
@@ -24,6 +26,8 @@ export declare class KeyProvider implements IKeyProvider {
     deployerProxyContract?: Contract;
     relayHubContract?: Contract;
     crossChainBridgeContract?: Contract;
+    kdiTokenContract?: Contract;
+    kdiMasterChefContract?: Contract;
     constructor(config: IConfig);
     isConnected(): boolean;
     connect(web3: Web3): Promise<void>;
